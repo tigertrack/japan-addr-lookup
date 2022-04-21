@@ -10,3 +10,5 @@
 3. 次を実行してローカルにデプロイします。
 
         yarn dev
+
+デモプレビューについては、次のリンクを使用してください [DEMO](https://afternoon-plateau-17342.herokuapp.com/)
