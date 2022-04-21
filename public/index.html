@@ -97,10 +97,12 @@
         previous(){
             this.pageNumber--
             this.fetchAddress()
+            window.scrollTo({top: 0, behavior:'smooth'})
         },
         next(){
             this.pageNumber++
             this.fetchAddress()
+            window.scrollTo({top: 0, behavior:'smooth'})
         }
     }, 
 
