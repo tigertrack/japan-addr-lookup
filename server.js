@@ -10,14 +10,14 @@ let arrdata = Object.values(data)
 
 app.get('/addresses', (req, res) => {
     
-    let {keyword, page, page_size, isPaginated} = req.query
+    let {keyword, page, page_size, ispaginated} = req.query
 
     keyword = (keyword) ? keyword.replace(/\s+/g,'') : ''
 
-    isPaginated = isPaginated ?? true
+    ispaginated = ispaginated ?? true
 
     let data = search(arrdata, keyword)
-    if (isPaginated === true) 
+    if (ispaginated === true || ispaginated === "true") 
         return res.json(paginate(data, page_size, page))
     return res.json(data)
 
