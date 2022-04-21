@@ -28,7 +28,8 @@
         adddresses: [],
         pageCount: 0,
         keyword: '',
-        pageNumber: 1
+        pageNumber: 1,
+        isLoading: false
       }
     },
     computed: {
@@ -46,10 +47,13 @@
     </div>
     <div class="row d-flex">
         <div class="col-auto flex-grow-1">
-            <input type="text" class="form-control" id="search" v-model="keyword" placeholder="検索キーワードを入力してください"  v-on:keyup.enter="search" />
+            <input :disabled="isLoading" type="text" class="form-control" id="search" v-model="keyword" placeholder="検索キーワードを入力してください"  v-on:keyup.enter="search" />
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-primary mb-3" @click="search">検索</button>
+            <button :disabled="isLoading" type="button" class="btn btn-primary mb-3" @click="search">
+                <span v-if="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span v-text="(isLoading) ? '' : '検索'" />
+            </button>
         </div>
     </div>
     
@@ -83,11 +87,13 @@
 
     methods: {
         fetchAddress(){
+            this.isLoading = true
             fetch(`/addresses?page=${this.pageNumber}&page_size=${PAGE_SIZE}${(this.keyword != '') ? `&keyword=${this.keyword}` : ''}`)
             .then( e => e.json())
             .then( e => {
                 this.adddresses = e.data
                 this.pageCount = e.pageCount
+                this.isLoading = false
             })
         },
         search(){
