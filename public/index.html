@@ -82,8 +82,8 @@
 </div>`,
 
     methods: {
-        fetchAddress(keyword = ''){
-            fetch(`/addresses?page=${this.pageNumber}&page_size=${PAGE_SIZE}${(keyword != '') ? `&keyword=${this.keyword}` : ''}`)
+        fetchAddress(){
+            fetch(`/addresses?page=${this.pageNumber}&page_size=${PAGE_SIZE}${(this.keyword != '') ? `&keyword=${this.keyword}` : ''}`)
             .then( e => e.json())
             .then( e => {
                 this.adddresses = e.data
